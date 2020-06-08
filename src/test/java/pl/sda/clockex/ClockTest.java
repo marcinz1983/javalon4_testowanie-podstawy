@@ -9,6 +9,7 @@ public class ClockTest {
 
     Clock c = new Clock();
 
+
     //--- create
     @Test
     public void create_and_initialize_to_00_00_00() {
@@ -73,6 +74,7 @@ public class ClockTest {
         //then
         assertEquals(59, c.getMinutes());
     }
+
     //--- in range
     //--- out of range
     @Test
@@ -242,6 +244,7 @@ public class ClockTest {
         assertEquals(0, c.getMinutes());
         assertEquals(30, c.getSeconds());
     }
+
     //setSeconds
     @Test
     public void set_seconds_to_min_value() {
@@ -409,4 +412,74 @@ public class ClockTest {
         assertEquals(0, c.getMinutes());
         assertEquals(0, c.getSeconds());
     }
+
+
+    @Test
+    public void reduce_clock_12_30_45_minus_2_10_55() {
+        //given
+        c = new Clock(12, 30, 45);
+        Clock c2 = new Clock(2, 10, 55);
+
+        //when
+        c.minusClock(c2);
+
+        //then
+        assertEquals(10, c.getHour());
+        assertEquals(19, c.getMinutes());
+        assertEquals(50, c.getSeconds());
+
+    }
+
+    @Test
+    public void reduc_esecounds_12_35_30_minus_70_gives_12_34_20() {
+        //given
+        c = new Clock(12, 35, 30);
+
+
+        //when
+        c.minusSecounds(70);
+
+        //then
+        assertEquals(12,c.getHour());
+        assertEquals(34,c.getMinutes());
+        assertEquals(20, c.getSeconds());
+
+
+        //then
+
+    }
+
+    @Test
+    public void reduce_hours_12_00_20_minus_3h_given_9_00_20() {
+        //given
+        c = new Clock(12, 00, 20);
+
+
+        //when
+        c.minusHours(3);
+
+
+        //then
+        assertEquals(9, c.getHour());
+        assertEquals(0, c.getMinutes());
+        assertEquals(20, c.getSeconds());
+
+    }
+
+    @Test
+    public void reduce_minutes_9_50_00_minus_15_minutes_given_9_35_00(){
+        //given
+        c = new Clock(9,50,00);
+
+        //when
+        c.minusMinutes(15);
+
+
+        //then
+        assertEquals(9,c.getHour());
+        assertEquals(35,c.getMinutes());
+        assertEquals(0, c.getSeconds());
+    }
+
+
 }
